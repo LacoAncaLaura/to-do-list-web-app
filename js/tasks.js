@@ -1,4 +1,4 @@
-window.ToDoList = {
+window.ToDoList1 = {
     API_URL: 'http://localhost:8081/tasks',
     createTasks:function () {
         let descriptionValue = $('#description-field').val();
@@ -9,7 +9,7 @@ window.ToDoList = {
             deadline: deadlineValue
         };
         $.ajax({
-            url: ToDoList.API_URL,
+            url: ToDoList1.API_URL,
             method:'POST',
             contentType:'application/json',
             data:JSON.stringify(requestBody)
@@ -24,4 +24,4 @@ window.ToDoList = {
         })
     }
 };
-ToDoList.bindEvents();
+ToDoList1.bindEvents();
