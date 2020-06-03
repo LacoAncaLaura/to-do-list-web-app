@@ -20,7 +20,7 @@ window.ToDoList1 = {
     },
     bindEvents:function () {
         $('#create-task-form').submit(function () {
-            ToDoList.createTasks();
+            ToDoList1.createTasks();
         })
     }
 };
