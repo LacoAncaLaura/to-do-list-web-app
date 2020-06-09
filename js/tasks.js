@@ -14,14 +14,44 @@ window.ToDoList1 = {
             contentType:'application/json',
             data:JSON.stringify(requestBody)
         }).done(function (response) {
-            console.log('success')
-            console.log(response);
+           ToDoList1.getTasks();
         });
     },
+    getTasks: function() {
+        $.ajax({
+            url: ToDoList1.API_URL
+        })
+        done(function (response) {
+            ToDoList1.displayTasks(JSON.parse(response));
+        });
+    } ,
+    displayTasks:function(tasks){
+      let rowsHtml = '';
+      tasks.forEach(task => rowsHtml += ToDoList1.getTasksRowsHtml(task));
+      $('#tasks-table tbody').html(rowsHtml);
+    },
+    getTasksRowsHtml: function(task){
+      return ` <tr>
+        <td>${task.description}</td>
+        <td>${task.deadline}</td>
+        <td>
+            <input type="checkbox" class="mark-done" data-id=${task.id}>
+        </td>
+        <td>
+            <a href="#" class="remove-task" data-id=1>
+                <i class="fa fa-trash"></i></a>
+        </td>
+    </tr>`
+    },
     bindEvents:function () {
-        $('#create-task-form').submit(function () {
+        $('#create-task-form').submit(function (event) {
+            event.preventDefault();
             ToDoList1.createTasks();
+            console.log("success2");
         })
     }
+
 };
+// ToDoList1.displayTasks();
+ToDoList1.getTasks();
 ToDoList1.bindEvents();
